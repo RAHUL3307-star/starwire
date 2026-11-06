@@ -5,6 +5,7 @@
 <img src="assets/badges/categories-15.svg" alt="categories 15" height="20">
 <img src="assets/badges/updated-nov-6-2026.svg" alt="updated Nov 6, 2026" height="20">
 <a href="feed.xml"><img src="assets/badges/rss-feed.svg" alt=" RSS feed" height="20"></a>
+<a href="https://starwire.foo"><img src="assets/badges/browse-on-starwire-foo.svg" alt=" Browse on starwire.foo" height="20"></a>
 </p>
 
 <p align="center">
