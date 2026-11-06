@@ -9,16 +9,14 @@
 </p>
 
 <p align="center">
-<a href="#trending">🔥 Trending</a>&nbsp;&nbsp;&nbsp;
-<a href="#new-this-week">🆕 New this week</a>&nbsp;&nbsp;&nbsp;
-<a href="#picked-again-and-again">🔁 Picked again and again</a>&nbsp;&nbsp;&nbsp;
-<a href="#browse-by-category">🗂️ Categories</a>&nbsp;&nbsp;&nbsp;
-<a href="#submit-a-repo">➕ Submit a repo</a>
+<a href="#-trending">🔥 Trending</a>&nbsp;&nbsp;&nbsp;
+<a href="#-new-this-week">🆕 New this week</a>&nbsp;&nbsp;&nbsp;
+<a href="#-picked-again-and-again">🔁 Picked again and again</a>&nbsp;&nbsp;&nbsp;
+<a href="#-browse-by-category">🗂️ Categories</a>&nbsp;&nbsp;&nbsp;
+<a href="#-submit-a-repo">➕ Submit a repo</a>
 </p>
 
 <br>
-
-<a name="trending"></a>
 
 ## 🔥 Trending
 
@@ -41,8 +39,6 @@
 | <img src="https://github.com/KnifeLemon.png?size=40" width="20" height="20" alt=""> **[Filee](https://github.com/KnifeLemon/Filee)**<br><sub>KnifeLemon</sub><br>⭐&nbsp;**23k** | Offline file converter for 263 formats including documents, media and e-books<br><img src="assets/badges/c.svg" alt=" C#" height="20"> <sub>🧰 Everyday utilities&nbsp;&nbsp;·&nbsp;&nbsp;📈 +4.2k stars a week&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated 1d ago&nbsp;&nbsp;·&nbsp;&nbsp;MIT&nbsp;&nbsp;·&nbsp;&nbsp;1.4k forks</sub><br><code>audio-converter</code> <code>avalonia</code> <code>batch-conversion</code> <code>converter</code> |
 | <img src="https://github.com/NandhaKishorM.png?size=40" width="20" height="20" alt=""> **[laya](https://github.com/NandhaKishorM/laya)**<br><sub>NandhaKishorM</sub><br>⭐&nbsp;**35k** | One-pass model that returns typed choices, scores and yes/no answers for text<br><img src="assets/badges/python.svg" alt=" Python" height="20"> <img src="assets/badges/picked-2.svg" alt="picked 2×" height="20"> <sub>🧠 LLM tooling and local models&nbsp;&nbsp;·&nbsp;&nbsp;📈 +5.0k stars a week&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated 1d ago&nbsp;&nbsp;·&nbsp;&nbsp;Apache-2.0&nbsp;&nbsp;·&nbsp;&nbsp;3.1k forks</sub><br><code>calibration</code> <code>classification</code> <code>decision-model</code> <code>huggingface</code> |
 | <img src="https://github.com/storytold.png?size=40" width="20" height="20" alt=""> **[pdfcraft](https://github.com/storytold/pdfcraft)**<br><sub>storytold</sub><br>⭐&nbsp;**20k** | PDF reader and editor written in Rust<br><img src="assets/badges/rust.svg" alt=" Rust" height="20"> <sub>💻 Apps for desktop and mobile&nbsp;&nbsp;·&nbsp;&nbsp;📈 +3.7k stars a week&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated today&nbsp;&nbsp;·&nbsp;&nbsp;Apache-2.0&nbsp;&nbsp;·&nbsp;&nbsp;7.4k forks</sub><br><code>document-processing</code> <code>documents</code> <code>pdf</code> <code>pdf-generation</code> |
-
-<a name="new-this-week"></a>
 
 ## 🆕 New this week
 
@@ -73,8 +69,6 @@
 
 <sub>95 more this week, find them in the categories below.</sub>
 
-<a name="picked-again-and-again"></a>
-
 ## 🔁 Picked again and again
 
 <sub>When several independent sources pick the same repo, it's usually worth a look. 415 repos so far.</sub>
@@ -97,9 +91,7 @@
 | <img src="https://github.com/Panniantong.png?size=40" width="20" height="20" alt=""> **[Agent-Reach](https://github.com/Panniantong/Agent-Reach)**<br><sub>Panniantong</sub><br>⭐&nbsp;**109k** | CLI giving agents read and search access to Twitter, Reddit, YouTube and more<br><img src="assets/badges/python.svg" alt=" Python" height="20"> <img src="assets/badges/picked-4.svg" alt="picked 4×" height="20"> <sub>🧩 Agent skills and MCP&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated 2d ago&nbsp;&nbsp;·&nbsp;&nbsp;MIT&nbsp;&nbsp;·&nbsp;&nbsp;9.8k forks</sub><br><code>agent-infrastructure</code> <code>ai-agent</code> <code>ai-search</code> <code>automation</code> |
 | <img src="https://github.com/debpalash.png?size=40" width="20" height="20" alt=""> **[VoiceStudio](https://github.com/debpalash/VoiceStudio)**<br><sub>debpalash</sub><br>⭐&nbsp;**102k** | Local voice cloning, dubbing, dictation and transcription app<br><img src="assets/badges/python.svg" alt=" Python" height="20"> <img src="assets/badges/picked-4.svg" alt="picked 4×" height="20"> <sub>🎬 AI image, video and voice&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated today&nbsp;&nbsp;·&nbsp;&nbsp;AGPL-3.0&nbsp;&nbsp;·&nbsp;&nbsp;11k forks</sub><br><code>tts</code> <code>voice-cloning</code> <code>voice-generation</code> <code>voice-ai</code> |
 
-<a name="browse-by-category"></a>
-
-## 🗂️ Browse by category
+## 🗂 Browse by category
 
 <table>
 <tr><td valign="top" width="33%">
@@ -196,8 +188,6 @@
 | <code>topic</code> | GitHub topics set by the repo's owner |
 
 </details>
-
-<a name="submit-a-repo"></a>
 
 ## ➕ Submit a repo
 
