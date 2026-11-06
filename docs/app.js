@@ -206,6 +206,11 @@ async function readme(r) {
       img.loading = "lazy"
     }
     if (md.length > 15000) el.insertAdjacentHTML("beforeend", `<p><a href="https://github.com/${esc(r.r)}#readme" target="_blank" rel="noopener">Read the rest on GitHub</a></p>`)
+    // long READMEs start collapsed; the panel stays the only thing that scrolls
+    if (el.scrollHeight > el.clientHeight + 4) {
+      el.classList.add("long")
+      el.insertAdjacentHTML("afterend", `<button type="button" class="btn more-readme">Show the full README</button>`)
+    }
   } catch {
     el.innerHTML = `<p class="muted">Couldn't load the README. <a href="https://github.com/${esc(r.r)}#readme" target="_blank" rel="noopener">Read it on GitHub</a>.</p>`
   }
@@ -283,6 +288,8 @@ panel.addEventListener("click", async (e) => {
   if (e.target.closest(".p-close")) return closePanel()
   const sim = e.target.closest(".sim")
   if (sim) return openPanel(sim.dataset.r)
+  const more = e.target.closest(".more-readme")
+  if (more) { panel.querySelector(".readme").classList.add("open"); more.remove(); return }
   const copy = e.target.closest("[data-copy]")
   if (copy) { try { await navigator.clipboard.writeText(copy.dataset.copy); copy.textContent = "Copied" } catch { copy.textContent = copy.dataset.copy } setTimeout(() => (copy.textContent = "Copy git clone"), 1600) }
 })

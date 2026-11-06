@@ -216,6 +216,7 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 }
 .panel[hidden] { display: none; }
 .panel-scrim { display: none; }
+body.has-panel { overflow: hidden; } /* one scrollbar at a time: the page stops while the panel is open */
 body.has-panel .panel-scrim { display: block; position: fixed; inset: 0; z-index: 45; background: rgb(0 0 0 / 0.35); }
 @media (prefers-reduced-motion: no-preference) { .panel { animation: slide-in 0.18s ease-out; } @keyframes slide-in { from { transform: translateX(24px); } } }
 .p-head { position: sticky; top: 0; display: flex; align-items: center; gap: 12px; padding: 12px 16px; height: 64px; background: var(--panel); border-bottom: 1px solid var(--line); z-index: 1; }
@@ -238,7 +239,10 @@ body.has-panel .panel-scrim { display: block; position: fixed; inset: 0; z-index
 .muted { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
 .spark { width: 100%; height: 64px; display: block; }
 .spark polyline { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
-.readme { font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; max-height: 520px; overflow-y: auto; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--ink); }
+.readme { position: relative; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; max-height: 440px; overflow: hidden; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--ink); }
+.readme.open { max-height: none; }
+.readme:not(.open).long::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: linear-gradient(transparent, var(--ink)); pointer-events: none; }
+.more-readme { margin-top: 8px; }
 .readme :is(h1, h2, h3) { font-size: 15px; margin: 18px 0 8px; }
 .readme > :first-child { margin-top: 0; }
 .readme img { max-width: 100%; height: auto; }
@@ -262,3 +266,11 @@ body.has-panel .panel-scrim { display: block; position: fixed; inset: 0; z-index
   .panel { top: 8vh; width: 100vw; border-left: 0; border-top: 1px solid var(--line); border-radius: 14px 14px 0 0; }
   @media (prefers-reduced-motion: no-preference) { .panel { animation: slide-up 0.2s ease-out; } @keyframes slide-up { from { transform: translateY(32px); } } }
 }
+
+/* quiet, thin scrollbars everywhere, StarDash style */
+* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--muted) 35%, transparent) transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--muted) 30%, transparent); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background-color: color-mix(in srgb, var(--muted) 55%, transparent); }
+html { scrollbar-gutter: stable; }
