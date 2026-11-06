@@ -1,0 +1,48 @@
+name: Submit a repo
+description: Suggest an open source repo for starwire
+title: "Submit: "
+labels: ["submission"]
+body:
+  - type: input
+    id: repo
+    attributes:
+      label: Repo link
+      description: The GitHub URL, like https://github.com/owner/repo
+      placeholder: https://github.com/owner/repo
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Leave it on "Not sure" and it gets one automatically.
+      options:
+        - Not sure
+        - AI agents
+        - Agent skills and MCP
+        - LLM tooling and local models
+        - AI image, video and voice
+        - Developer tools
+        - Web and frontend
+        - Apps for desktop and mobile
+        - Self-hosted
+        - Data and databases
+        - DevOps and cloud
+        - Security and privacy
+        - Games and graphics
+        - Hardware and robotics
+        - Learning and reference
+        - Everyday utilities
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it belongs here
+      description: One or two sentences on what it does and who it helps.
+  - type: checkboxes
+    id: author
+    attributes:
+      label: Disclosure
+      options:
+        - label: I work on this project
