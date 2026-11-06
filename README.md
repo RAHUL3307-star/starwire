@@ -1,7 +1,7 @@
 <p align="center"><img src="assets/banner.svg" alt="starwire" width="100%"></p>
 
 <p align="center">
-<img src="assets/badges/repos-3-185.svg" alt="repos 3,185" height="20">
+<img src="assets/badges/repos-3-485.svg" alt="repos 3,485" height="20">
 <img src="assets/badges/categories-15.svg" alt="categories 15" height="20">
 <img src="assets/badges/updated-nov-6-2026.svg" alt="updated Nov 6, 2026" height="20">
 <a href="https://starwire.foo/feed.xml"><img src="assets/badges/rss-feed.svg" alt=" RSS feed" height="20"></a>
@@ -42,7 +42,7 @@
 
 ## 🆕 New this week
 
-<sub>115 repos first picked between Oct 30 and Nov 6, most stars first.</sub>
+<sub>143 repos first picked between Oct 30 and Nov 6, most stars first.</sub>
 
 | Repo | About |
 | :-- | :-- |
@@ -67,11 +67,11 @@
 | <img src="https://github.com/Dokploy.png?size=40" width="20" height="20" alt=""> **[dokploy](https://github.com/Dokploy/dokploy)**<br><sub>Dokploy</sub><br>⭐&nbsp;**38k** | Self-hosted deployment platform as an alternative to Vercel and Heroku<br><img src="assets/badges/typescript.svg" alt=" TypeScript" height="20"> <sub>🏠 Self-hosted&nbsp;&nbsp;·&nbsp;&nbsp;📈 +119 stars a week&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated today&nbsp;&nbsp;·&nbsp;&nbsp;3.2k forks</sub><br><code>deployment</code> <code>self-hosted</code> <code>vps</code> <code>backend</code> |
 | <img src="https://github.com/cjpais.png?size=40" width="20" height="20" alt=""> **[Handy](https://github.com/cjpais/Handy)**<br><sub>cjpais</sub><br>⭐&nbsp;**38k** | Offline speech-to-text desktop app built with Tauri v2<br><img src="assets/badges/rust.svg" alt=" Rust" height="20"> <img src="assets/badges/picked-2.svg" alt="picked 2×" height="20"> <sub>💻 Apps for desktop and mobile&nbsp;&nbsp;·&nbsp;&nbsp;🟢 updated 4d ago&nbsp;&nbsp;·&nbsp;&nbsp;MIT&nbsp;&nbsp;·&nbsp;&nbsp;3.6k forks</sub><br><code>speech-to-text</code> <code>tauri-v2</code> <code>accessibility</code> <code>cross-platform</code> |
 
-<sub>95 more this week, find them in the categories below.</sub>
+<sub>123 more this week, find them in the categories below.</sub>
 
 ## 🔁 Picked again and again
 
-<sub>When several independent sources pick the same repo, it's usually worth a look. 415 repos so far.</sub>
+<sub>When several independent sources pick the same repo, it's usually worth a look. 448 repos so far.</sub>
 
 | Repo | About |
 | :-- | :-- |
@@ -97,81 +97,81 @@
 <tr><td valign="top" width="33%">
 
 ### 🤖 [AI agents](lists/ai-agents.md)
-<sub>348 repos</sub><br><a href="https://github.com/openclaw/openclaw">openclaw</a>, <a href="https://github.com/affaan-m/ECC">ECC</a>, <a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-harness</a>
+<sub>380 repos</sub><br><a href="https://github.com/openclaw/openclaw">openclaw</a>, <a href="https://github.com/affaan-m/ECC">ECC</a>, <a href="https://github.com/deepseek-ai/deepseek-harness">deepseek-harness</a>
 
 </td><td valign="top" width="33%">
 
 ### 🧩 [Agent skills and MCP](lists/agent-skills-and-mcp.md)
-<sub>242 repos</sub><br><a href="https://github.com/mattpocock/skills">skills</a>, <a href="https://github.com/obra/superpowers">superpowers</a>, <a href="https://github.com/multica-ai/andrej-karpathy-skills">andrej-karpathy-skills</a>
+<sub>281 repos</sub><br><a href="https://github.com/mattpocock/skills">skills</a>, <a href="https://github.com/obra/superpowers">superpowers</a>, <a href="https://github.com/multica-ai/andrej-karpathy-skills">andrej-karpathy-skills</a>
 
 </td><td valign="top" width="33%">
 
 ### 🧠 [LLM tooling and local models](lists/llm-tooling-and-local-models.md)
-<sub>236 repos</sub><br><a href="https://github.com/ollama/ollama">ollama</a>, <a href="https://github.com/langgenius/dify">dify</a>, <a href="https://github.com/open-webui/open-webui">open-webui</a>
+<sub>280 repos</sub><br><a href="https://github.com/ollama/ollama">ollama</a>, <a href="https://github.com/langgenius/dify">dify</a>, <a href="https://github.com/open-webui/open-webui">open-webui</a>
 
 </td></tr>
 <tr><td valign="top" width="33%">
 
 ### 🎬 [AI image, video and voice](lists/ai-image-video-and-voice.md)
-<sub>189 repos</sub><br><a href="https://github.com/harry0703/MoneyPrinterTurbo">MoneyPrinterTurbo</a>, <a href="https://github.com/openai/whisper">whisper</a>, <a href="https://github.com/debpalash/VoiceStudio">VoiceStudio</a>
+<sub>231 repos</sub><br><a href="https://github.com/harry0703/MoneyPrinterTurbo">MoneyPrinterTurbo</a>, <a href="https://github.com/openai/whisper">whisper</a>, <a href="https://github.com/debpalash/VoiceStudio">VoiceStudio</a>
 
 </td><td valign="top" width="33%">
 
 ### 🛠️ [Developer tools](lists/developer-tools.md)
-<sub>532 repos</sub><br><a href="https://github.com/tensorflow/tensorflow">tensorflow</a>, <a href="https://github.com/microsoft/vscode">vscode</a>, <a href="https://github.com/flutter/flutter">flutter</a>
+<sub>559 repos</sub><br><a href="https://github.com/tensorflow/tensorflow">tensorflow</a>, <a href="https://github.com/microsoft/vscode">vscode</a>, <a href="https://github.com/flutter/flutter">flutter</a>
 
 </td><td valign="top" width="33%">
 
 ### 🌐 [Web and frontend](lists/web-and-frontend.md)
-<sub>139 repos</sub><br><a href="https://github.com/react/react">react</a>, <a href="https://github.com/vercel/next.js">next.js</a>, <a href="https://github.com/VoltAgent/awesome-design-md">awesome-design-md</a>
+<sub>147 repos</sub><br><a href="https://github.com/react/react">react</a>, <a href="https://github.com/vercel/next.js">next.js</a>, <a href="https://github.com/VoltAgent/awesome-design-md">awesome-design-md</a>
 
 </td></tr>
 <tr><td valign="top" width="33%">
 
 ### 💻 [Apps for desktop and mobile](lists/apps-for-desktop-and-mobile.md)
-<sub>238 repos</sub><br><a href="https://github.com/clash-verge-rev/clash-verge-rev">clash-verge-rev</a>, <a href="https://github.com/Genymobile/scrcpy">scrcpy</a>, <a href="https://github.com/farion1231/cc-switch">cc-switch</a>
+<sub>261 repos</sub><br><a href="https://github.com/clash-verge-rev/clash-verge-rev">clash-verge-rev</a>, <a href="https://github.com/Genymobile/scrcpy">scrcpy</a>, <a href="https://github.com/farion1231/cc-switch">cc-switch</a>
 
 </td><td valign="top" width="33%">
 
 ### 🏠 [Self-hosted](lists/self-hosted.md)
-<sub>162 repos</sub><br><a href="https://github.com/rustdesk/rustdesk">rustdesk</a>, <a href="https://github.com/immich-app/immich">immich</a>, <a href="https://github.com/fatedier/frp">frp</a>
+<sub>170 repos</sub><br><a href="https://github.com/rustdesk/rustdesk">rustdesk</a>, <a href="https://github.com/immich-app/immich">immich</a>, <a href="https://github.com/fatedier/frp">frp</a>
 
 </td><td valign="top" width="33%">
 
 ### 🗄️ [Data and databases](lists/data-and-databases.md)
-<sub>135 repos</sub><br><a href="https://github.com/supabase/supabase">supabase</a>, <a href="https://github.com/unclecode/crawl4ai">crawl4ai</a>, <a href="https://github.com/elastic/elasticsearch">elasticsearch</a>
+<sub>142 repos</sub><br><a href="https://github.com/supabase/supabase">supabase</a>, <a href="https://github.com/unclecode/crawl4ai">crawl4ai</a>, <a href="https://github.com/elastic/elasticsearch">elasticsearch</a>
 
 </td></tr>
 <tr><td valign="top" width="33%">
 
 ### ☁️ [DevOps and cloud](lists/devops-and-cloud.md)
-<sub>107 repos</sub><br><a href="https://github.com/caddyserver/caddy">caddy</a>, <a href="https://github.com/nektos/act">act</a>, <a href="https://github.com/dockur/windows">windows</a>
+<sub>110 repos</sub><br><a href="https://github.com/caddyserver/caddy">caddy</a>, <a href="https://github.com/nektos/act">act</a>, <a href="https://github.com/dockur/windows">windows</a>
 
 </td><td valign="top" width="33%">
 
 ### 🔐 [Security and privacy](lists/security-and-privacy.md)
-<sub>175 repos</sub><br><a href="https://github.com/morluto/rea">rea</a>, <a href="https://github.com/NationalSecurityAgency/ghidra">ghidra</a>, <a href="https://github.com/swisskyrepo/PayloadsAllTheThings">PayloadsAllTheThings</a>
+<sub>183 repos</sub><br><a href="https://github.com/morluto/rea">rea</a>, <a href="https://github.com/NationalSecurityAgency/ghidra">ghidra</a>, <a href="https://github.com/swisskyrepo/PayloadsAllTheThings">PayloadsAllTheThings</a>
 
 </td><td valign="top" width="33%">
 
 ### 🎮 [Games and graphics](lists/games-and-graphics.md)
-<sub>174 repos</sub><br><a href="https://github.com/boykopovar/AnyPS5">AnyPS5</a>, <a href="https://github.com/ManimCommunity/manim">manim</a>, <a href="https://github.com/shadps4-emu/shadPS4">shadPS4</a>
+<sub>190 repos</sub><br><a href="https://github.com/boykopovar/AnyPS5">AnyPS5</a>, <a href="https://github.com/ManimCommunity/manim">manim</a>, <a href="https://github.com/shadps4-emu/shadPS4">shadPS4</a>
 
 </td></tr>
 <tr><td valign="top" width="33%">
 
 ### 🦾 [Hardware and robotics](lists/hardware-and-robotics.md)
-<sub>150 repos</sub><br><a href="https://github.com/ruvnet/RuView">RuView</a>, <a href="https://github.com/commaai/openpilot">openpilot</a>, <a href="https://github.com/librepods-org/librepods">librepods</a>
+<sub>169 repos</sub><br><a href="https://github.com/ruvnet/RuView">RuView</a>, <a href="https://github.com/commaai/openpilot">openpilot</a>, <a href="https://github.com/librepods-org/librepods">librepods</a>
 
 </td><td valign="top" width="33%">
 
 ### 📚 [Learning and reference](lists/learning-and-reference.md)
-<sub>179 repos</sub><br><a href="https://github.com/codecrafters-io/build-your-own-x">build-your-own-x</a>, <a href="https://github.com/sindresorhus/awesome">awesome</a>, <a href="https://github.com/practical-tutorials/project-based-learning">project-based-learning</a>
+<sub>190 repos</sub><br><a href="https://github.com/codecrafters-io/build-your-own-x">build-your-own-x</a>, <a href="https://github.com/sindresorhus/awesome">awesome</a>, <a href="https://github.com/practical-tutorials/project-based-learning">project-based-learning</a>
 
 </td><td valign="top" width="33%">
 
 ### 🧰 [Everyday utilities](lists/everyday-utilities.md)
-<sub>179 repos</sub><br><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a>, <a href="https://github.com/iptv-org/iptv">iptv</a>, <a href="https://github.com/microsoft/PowerToys">PowerToys</a>
+<sub>192 repos</sub><br><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a>, <a href="https://github.com/iptv-org/iptv">iptv</a>, <a href="https://github.com/microsoft/PowerToys">PowerToys</a>
 
 </td></tr>
 </table>
