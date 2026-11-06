@@ -2,6 +2,7 @@
 const $ = (s) => document.querySelector(s)
 const PAGE = 60
 const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg>'
+const GH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>'
 const num = (n) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : String(n))
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c])
 
@@ -12,7 +13,7 @@ const repos = data.repos.map((r) => ({ ...r, hay: `${r.r} ${r.l} ${r.g ?? ""} ${
 const params = new URLSearchParams(location.search)
 const state = {
   f: params.get("f") ?? (params.has("multi") ? "multi" : ""), c: params.get("c") ?? "", q: params.get("q") ?? "",
-  sort: params.get("sort") ?? "picked", lang: params.get("lang") ?? "", view: params.get("view") ?? "cards", shown: PAGE,
+  repo: params.get("repo") ?? "", sort: params.get("sort") ?? "picked", lang: params.get("lang") ?? "", view: params.get("view") ?? "cards", shown: PAGE,
 }
 const isNew = (r) => (now - Date.parse(r.f)) / 864e5 <= 7
 const VIEWS = [
@@ -57,12 +58,12 @@ const fresh = (d) => (d < 30 ? ["var(--green)", d < 1 ? "updated today" : `updat
 function card(r) {
   const [owner, name] = r.r.split("/")
   const [fc, ft] = fresh(r.age)
-    return `<a class="repo" href="https://github.com/${esc(r.r)}" target="_blank" rel="noopener">
-  <div class="head"><img src="https://github.com/${esc(owner)}.png?size=56" alt="" loading="lazy" width="28" height="28"><div class="name"><strong>${esc(name)}</strong><span>${esc(owner)}</span></div></div>
+  return `<div class="repo" role="button" tabindex="0" data-r="${esc(r.r)}" aria-label="${esc(name)} details">
+  <div class="head"><img src="https://github.com/${esc(owner)}.png?size=56" alt="" loading="lazy" width="28" height="28"><div class="name"><strong>${esc(name)}</strong><span>${esc(owner)}</span></div><a class="jump" href="https://github.com/${esc(r.r)}" target="_blank" rel="noopener" aria-label="Open ${esc(name)} on GitHub" title="Open on GitHub">${GH}</a></div>
   <p class="line">${esc(r.l)}</p>
   ${r.t.length ? `<div class="topics">${r.t.slice(0, 3).map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
   <div class="meta"><span class="stars">${STAR}${num(r.s)}</span>${r.g ? `<span class="dot" style="--c:${esc(r.gc ?? "")}">${esc(r.g)}</span>` : ""}${r.h > 0 ? `<span class="rise">+${num(r.w)} a week</span>` : ""}<span class="fresh" style="--f:${fc}">${ft}</span>${r.k > 1 ? `<span class="pill picked">picked ${r.k}×</span>` : ""}${isNew(r) ? '<span class="pill new">new</span>' : ""}</div>
-</a>`
+</div>`
 }
 
 const promo = `<a class="promo" href="https://github.com/boffti/stardash" target="_blank" rel="noopener">
@@ -107,7 +108,7 @@ function render() {
   document.querySelectorAll(".view button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === state.view)))
   $("#reset")?.addEventListener("click", () => set({ f: "", c: "", q: "", lang: "" }, true))
   const p = new URLSearchParams()
-  for (const k of ["f", "c", "q", "lang"]) if (state[k]) p.set(k, state[k])
+  for (const k of ["f", "c", "q", "lang", "repo"]) if (state[k]) p.set(k, state[k])
   if (state.sort !== "picked") p.set("sort", state.sort)
   if (state.view !== "cards") p.set("view", state.view)
   history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}`)
@@ -151,3 +152,140 @@ $("#theme").addEventListener("click", () => {
   try { localStorage.setItem("starwire-theme", document.documentElement.dataset.theme) } catch {}
 })
 render()
+
+// ---- repo panel: README preview, facts, star trend, similar repos ----
+const byName = new Map(repos.map((r) => [r.r.toLowerCase(), r]))
+const panel = $("#panel")
+let libs
+const loadLibs = () =>
+  (libs ??= Promise.all(
+    ["https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js", "https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"].map(
+      (src) => new Promise((ok, fail) => document.head.append(Object.assign(document.createElement("script"), { src, onload: ok, onerror: fail }))),
+    ),
+  ))
+
+function similar(r) {
+  const tags = new Set(r.t)
+  return repos
+    .filter((x) => x !== r && x.c === r.c)
+    .map((x) => [x, x.t.filter((t) => tags.has(t)).length * 3 + x.k + Math.log10(x.s + 1)])
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([x]) => x)
+}
+
+function trend(hs) {
+  if (hs.length < 2) return `<p class="muted">Star history starts with this list, so the chart fills in over the next few updates.</p>`
+  const ys = hs.map((h) => h[1]), lo = Math.min(...ys), hi = Math.max(...ys), w = 320, h = 64
+  const pts = hs.map(([, s], i) => `${((i / (hs.length - 1)) * w).toFixed(1)},${(h - 4 - ((s - lo) / (hi - lo || 1)) * (h - 8)).toFixed(1)}`).join(" ")
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-label="Stars from ${num(lo)} to ${num(hi)}"><polyline points="${pts}"/></svg><p class="muted">${num(lo)} to ${num(hi)} stars, ${esc(hs[0][0])} to ${esc(hs.at(-1)[0])}</p>`
+}
+
+async function readme(r) {
+  const el = panel.querySelector(".readme")
+  try {
+    await loadLibs()
+    let md
+    for (const f of ["README.md", "readme.md", "Readme.md", "README.MD", "README"]) {
+      const res = await fetch(`https://raw.githubusercontent.com/${r.r}/HEAD/${f}`)
+      if (res.ok) { md = await res.text(); break }
+    }
+    if (state.repo !== r.r) return // the user moved on while it loaded
+    if (!md) { el.innerHTML = `<p class="muted">This repo has no README to preview.</p>`; return }
+    const html = DOMPurify.sanitize(marked.parse(md.slice(0, 15000)))
+    el.innerHTML = html
+    // relative links and images point into the repo
+    for (const a of el.querySelectorAll("a[href]")) {
+      const h = a.getAttribute("href")
+      if (!/^(https?:|mailto:|#)/.test(h)) a.href = `https://github.com/${r.r}/blob/HEAD/${h.replace(/^\.?\//, "")}`
+      a.target = "_blank"; a.rel = "noopener"
+    }
+    for (const img of el.querySelectorAll("img[src]")) {
+      const src = img.getAttribute("src")
+      if (!/^(https?:|data:)/.test(src)) img.src = `https://raw.githubusercontent.com/${r.r}/HEAD/${src.replace(/^\.?\//, "")}`
+      img.loading = "lazy"
+    }
+    if (md.length > 15000) el.insertAdjacentHTML("beforeend", `<p><a href="https://github.com/${esc(r.r)}#readme" target="_blank" rel="noopener">Read the rest on GitHub</a></p>`)
+  } catch {
+    el.innerHTML = `<p class="muted">Couldn't load the README. <a href="https://github.com/${esc(r.r)}#readme" target="_blank" rel="noopener">Read it on GitHub</a>.</p>`
+  }
+}
+
+function openPanel(name, push = true) {
+  const r = byName.get(name.toLowerCase())
+  if (!r) return closePanel()
+  const [owner, repo] = r.r.split("/")
+  const [fc, ft] = fresh(r.age)
+  const facts = [
+    ["Stars", num(r.s)],
+    r.h > 0 ? ["This week", `+${num(r.w)}`] : null,
+    ["Forks", num(r.fk ?? 0)],
+    ["License", r.li ?? "None listed"],
+    ["Language", r.g ?? "Mixed"],
+    r.ca ? ["Created", new Date(r.ca).toLocaleDateString("en-US", { month: "short", year: "numeric" })] : null,
+    r.k > 1 ? ["Picked", `${r.k} times`] : null,
+  ].filter(Boolean)
+  panel.innerHTML = `
+  <div class="p-head">
+    <img src="https://github.com/${esc(owner)}.png?size=80" alt="" width="40" height="40">
+    <div class="name"><strong>${esc(repo)}</strong><span>${esc(owner)}</span></div>
+    <button class="icon-btn p-close" type="button" aria-label="Close details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="p-body">
+    <p class="p-line">${esc(r.l)}</p>
+    <div class="p-actions">
+      <a class="btn primary" href="https://github.com/${esc(r.r)}" target="_blank" rel="noopener">${GH}Open on GitHub</a>
+      ${r.hp ? `<a class="btn" href="${esc(r.hp)}" target="_blank" rel="noopener">Website</a>` : ""}
+      <button class="btn" type="button" data-copy="git clone https://github.com/${esc(r.r)}.git">Copy git clone</button>
+    </div>
+    <dl class="p-facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}<div><dt>Activity</dt><dd><span class="fresh" style="--f:${fc}">${ft}</span></dd></div></dl>
+    ${r.t.length ? `<div class="topics">${r.t.map((t) => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+    <section><h3>Stars over time</h3>${trend(r.hs ?? [])}</section>
+    <section><h3>README</h3><div class="readme"><p class="muted">Loading README…</p></div></section>
+    <section><h3>Similar in ${esc(r.c)}</h3><div class="p-similar">${similar(r).map((x) => `<button type="button" class="sim" data-r="${esc(x.r)}"><img src="https://github.com/${esc(x.r.split("/")[0])}.png?size=40" alt="" width="20" height="20" loading="lazy"><span><strong>${esc(x.r.split("/")[1])}</strong><small>${esc(x.l)}</small></span><em>${STAR}${num(x.s)}</em></button>`).join("")}</div></section>
+    <a class="p-promo" href="https://github.com/boffti/stardash" target="_blank" rel="noopener">Starring this? <strong>StarDash</strong> keeps your GitHub stars organized and tells you when they ship breaking changes. Free, open source and self-hosted.</a>
+  </div>`
+  panel.hidden = false
+  document.body.classList.add("has-panel")
+  panel.scrollTop = 0
+  state.repo = r.r
+  if (push) setRepoParam(r.r)
+  readme(r)
+}
+
+// only the repo param changes, so the grid isn't re-rendered under the panel
+function setRepoParam(v) {
+  const u = new URL(location.href)
+  v ? u.searchParams.set("repo", v) : u.searchParams.delete("repo")
+  history.replaceState(null, "", u.pathname + u.search)
+}
+
+function closePanel() {
+  if (panel.hidden) return
+  panel.hidden = true
+  document.body.classList.remove("has-panel")
+  const was = state.repo
+  state.repo = ""
+  setRepoParam("")
+  document.querySelector(`.repo[data-r="${CSS.escape(was)}"]`)?.focus()
+}
+
+$("#results").addEventListener("click", (e) => {
+  if (e.target.closest(".jump")) return // the GitHub icon opens GitHub
+  const c = e.target.closest(".repo[data-r]")
+  if (!c) return
+  if (e.metaKey || e.ctrlKey) return void window.open(`https://github.com/${c.dataset.r}`, "_blank", "noopener")
+  openPanel(c.dataset.r)
+})
+$("#results").addEventListener("auxclick", (e) => { const c = e.target.closest(".repo[data-r]"); if (c && e.button === 1 && !e.target.closest(".jump")) window.open(`https://github.com/${c.dataset.r}`, "_blank", "noopener") })
+$("#results").addEventListener("keydown", (e) => { const c = e.target.closest(".repo[data-r]"); if (c && (e.key === "Enter" || e.key === " ") && e.target === c) { e.preventDefault(); openPanel(c.dataset.r) } })
+panel.addEventListener("click", async (e) => {
+  if (e.target.closest(".p-close")) return closePanel()
+  const sim = e.target.closest(".sim")
+  if (sim) return openPanel(sim.dataset.r)
+  const copy = e.target.closest("[data-copy]")
+  if (copy) { try { await navigator.clipboard.writeText(copy.dataset.copy); copy.textContent = "Copied" } catch { copy.textContent = copy.dataset.copy } setTimeout(() => (copy.textContent = "Copy git clone"), 1600) }
+})
+$("#pscrim").addEventListener("click", closePanel)
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) closePanel() })
+if (state.repo) openPanel(state.repo, false)
