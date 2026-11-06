@@ -200,3 +200,7 @@ Know a repo that belongs here? [Open a submission](https://github.com/boffti/sta
 - [`data/repos.json`](data/repos.json): every repo with stars, language, license, topics, category and when it was first picked.
 - [`starwire.foo/feed.xml`](https://starwire.foo/feed.xml): RSS feed of the 100 newest picks. Add it to any feed reader. [StarDash](https://github.com/boffti/stardash), a free and open source dashboard for your GitHub stars that you host yourself, reads it as a Radar source.
 
+## 📄 License
+
+The list (this README, `lists/`, `data/` and the feed) is [CC0 1.0](LICENSE): use it for anything, no credit needed. The site code in `docs/` is [MIT](docs/LICENSE). Want to help? See [CONTRIBUTING.md](CONTRIBUTING.md).
+
