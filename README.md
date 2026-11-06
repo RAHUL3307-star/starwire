@@ -4,7 +4,7 @@
 <img src="assets/badges/repos-3-185.svg" alt="repos 3,185" height="20">
 <img src="assets/badges/categories-15.svg" alt="categories 15" height="20">
 <img src="assets/badges/updated-nov-6-2026.svg" alt="updated Nov 6, 2026" height="20">
-<a href="feed.xml"><img src="assets/badges/rss-feed.svg" alt=" RSS feed" height="20"></a>
+<a href="https://starwire.foo/feed.xml"><img src="assets/badges/rss-feed.svg" alt=" RSS feed" height="20"></a>
 <a href="https://starwire.foo"><img src="assets/badges/browse-on-starwire-foo.svg" alt=" Browse on starwire.foo" height="20"></a>
 </p>
 
@@ -198,5 +198,5 @@ Know a repo that belongs here? [Open a submission](https://github.com/boffti/sta
 ## 📡 Use the data
 
 - [`data/repos.json`](data/repos.json): every repo with stars, language, license, topics, category and when it was first picked.
-- [`feed.xml`](feed.xml): RSS feed of new picks. [StarDash](https://github.com/boffti/stardash), a free and open source dashboard for your GitHub stars that you host yourself, reads it as a Radar source.
+- [`starwire.foo/feed.xml`](https://starwire.foo/feed.xml): RSS feed of the 100 newest picks. Add it to any feed reader. [StarDash](https://github.com/boffti/stardash), a free and open source dashboard for your GitHub stars that you host yourself, reads it as a Radar source.
 
