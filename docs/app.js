@@ -150,6 +150,7 @@ $("#theme").addEventListener("click", () => {
   const dark = getComputedStyle(document.documentElement).colorScheme.includes("dark")
   document.documentElement.dataset.theme = dark ? "light" : "dark"
   try { localStorage.setItem("starwire-theme", document.documentElement.dataset.theme) } catch {}
+  followTheme(panel)
 })
 render()
 
@@ -163,6 +164,20 @@ const loadLibs = () =>
       (src) => new Promise((ok, fail) => document.head.append(Object.assign(document.createElement("script"), { src, onload: ok, onerror: fail }))),
     ),
   ))
+
+// A README <picture> picks its logo with prefers-color-scheme, which is the OS setting. Follow the
+// site's theme instead, so a light site never gets the white logo. Only that one feature is swapped
+// for an always-true or always-false query, so any other condition in the media query still applies.
+const siteDark = () => getComputedStyle(document.documentElement).colorScheme.includes("dark")
+function followTheme(root) {
+  const dark = siteDark()
+  for (const s of root.querySelectorAll("source[media]")) {
+    s.dataset.media ??= s.getAttribute("media")
+    if (!/prefers-color-scheme/i.test(s.dataset.media)) continue
+    s.setAttribute("media", s.dataset.media.replace(/\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi, (_, v) => ((v.toLowerCase() === "dark") === dark ? "(min-width: 0px)" : "(min-width: 99999px)")))
+  }
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => followTheme(panel))
 
 function similar(r) {
   const tags = new Set(r.t)
@@ -192,19 +207,27 @@ async function readme(r) {
     }
     if (state.repo !== r.r) return // the user moved on while it loaded
     if (!md) { el.innerHTML = `<p class="muted">This repo has no README to preview.</p>`; return }
-    const html = DOMPurify.sanitize(marked.parse(md.slice(0, 15000)))
-    el.innerHTML = html
+    // fix the URLs on the sanitized fragment, before it is inserted: an inserted <img> or <picture>
+    // starts fetching at once, and a relative path would hit starwire.foo and 404
+    const frag = DOMPurify.sanitize(marked.parse(md.slice(0, 15000)), { RETURN_DOM_FRAGMENT: true })
     // relative links and images point into the repo
-    for (const a of el.querySelectorAll("a[href]")) {
+    for (const a of frag.querySelectorAll("a[href]")) {
       const h = a.getAttribute("href")
       if (!/^(https?:|mailto:|#)/.test(h)) a.href = `https://github.com/${r.r}/blob/HEAD/${h.replace(/^\.?\//, "")}`
       a.target = "_blank"; a.rel = "noopener"
     }
-    for (const img of el.querySelectorAll("img[src]")) {
-      const src = img.getAttribute("src")
-      if (!/^(https?:|data:)/.test(src)) img.src = `https://raw.githubusercontent.com/${r.r}/HEAD/${src.replace(/^\.?\//, "")}`
+    const raw = (u) => (/^(https?:|data:|\/\/)/.test(u) ? u : `https://raw.githubusercontent.com/${r.r}/HEAD/${u.replace(/^\.?\//, "")}`)
+    for (const img of frag.querySelectorAll("img[src]")) {
+      img.setAttribute("src", raw(img.getAttribute("src")))
       img.loading = "lazy"
     }
+    // <picture><source srcset> wins over the <img> inside it (dark mode READMEs use it for a dark logo), so it needs the same
+    for (const s of frag.querySelectorAll("[srcset]")) {
+      const v = s.getAttribute("srcset").trim()
+      if (v) s.setAttribute("srcset", v.split(/\s*,\s+/).map((c) => { const [u, ...d] = c.split(/\s+/); return [raw(u), ...d].join(" ") }).join(", "))
+    }
+    followTheme(frag)
+    el.replaceChildren(frag)
     if (md.length > 15000) el.insertAdjacentHTML("beforeend", `<p><a href="https://github.com/${esc(r.r)}#readme" target="_blank" rel="noopener">Read the rest on GitHub</a></p>`)
     // long READMEs start collapsed; the panel stays the only thing that scrolls
     if (el.scrollHeight > el.clientHeight + 4) {
